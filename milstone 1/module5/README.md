@@ -1,4 +1,4 @@
-#### For multiple query 
+### For multiple query 
 
 **Module 5.4 $in ,$nin ,implicit and condition**
 ## [Query and Projection Operators](https://www.mongodb.com/docs/manual/reference/operator/query/)
@@ -131,3 +131,47 @@ db.test.find({friends:{$type: "array"}})
 db.test.find({friends:{$size:4}}).project({friends:1})
 
 ```
+
+
+
+
+ **Module  5-7 $all , $elemMatch**
+## [Array Query Operators](https://www.mongodb.com/docs/manual/reference/operator/query-array/)
+
+
+**If I get data base on his index number from a array than**
+```
+// this is for get data from an array
+
+db.test.find({interests:'Cooking'}).project({interests:1})
+
+//this is for get data base one index
+
+
+db.test.find({'interests.2':'Cooking'}).project({interests:1})
+
+/// -----> only change is when i declare a filed we add the index number ('interests.2')
+```
+
+## this is for array  [$all](https://www.mongodb.com/docs/manual/reference/operator/query/all/#mongodb-query-op.-all)
+
+**This is use if we need that there have different data in  a array and if we want to pass array of data . If there have all data is match and position is not match  then showing this data 
+```
+db.test.find({interests:{$all:['Cooking',"Gardening", "Gaming"]}}).project({interests:1})
+
+
+```
+
+##  this is for object [$elemMatch (query)](https://www.mongodb.com/docs/manual/reference/operator/query/elemMatch/#mongodb-query-op.-elemMatch)
+
+```
+db.test.find(
+    
+    {skills:{ 
+$elemMatch:{level:'Intermidiate',name:'JAVASCRIPT'}}}
+    
+    ).project({skills:1})
+
+
+```
+
