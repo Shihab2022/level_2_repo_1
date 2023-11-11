@@ -175,3 +175,50 @@ $elemMatch:{level:'Intermidiate',name:'JAVASCRIPT'}}}
 
 ```
 
+### Update
+
+
+ **Module  5-8 $set, $addToSet, $push,**
+## [Update Operators](https://www.mongodb.com/docs/manual/reference/operator/update/)
+
+***Update One***
+
+**$set**
+```
+// this is only for primetive data type
+
+// here first parameter is which data we want to update
+// second parameter is which data we want to update
+db.test.updateOne(
+    {_id:ObjectId("6406ad65fc13ae5a400000c6")},
+    {$set:{
+        salary:0
+    }}
+    )
+```
+
+**$addToSet**
+
+```
+//This is use for update an array .For single value add
+
+db.test.updateOne(
+    {_id:ObjectId("6406ad65fc13ae5a400000c6")},
+    {$addToSet: {languages:'bangla'}
+        
+    }
+    )
+
+//This is use for update an array .For multiple value 
+
+
+db.test.updateOne(
+    {_id:ObjectId("6406ad65fc13ae5a400000c6")},
+    {$addToSet: {languages:{$each: ['arabic','hindi']}}
+        
+    }
+    )
+
+```
+
+**$addToSet:**
