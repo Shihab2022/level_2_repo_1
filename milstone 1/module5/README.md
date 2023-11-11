@@ -221,4 +221,16 @@ db.test.updateOne(
 
 ```
 
-**$addToSet:**
+**$push:**
+
+
+```
+//This is use for update an array .But it can dublicate the value.
+
+db.test.updateOne(
+    {_id:ObjectId("6406ad65fc13ae5a400000c6")},
+    {$push: {languages:'bangla'}
+        
+    }
+    )
+```
