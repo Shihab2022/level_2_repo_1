@@ -319,7 +319,7 @@ This is for array .
     'education.major': 'Business' },
  ```
 then use $ symbol for update the first element of this array of object 
-##[$ (update)](https://www.mongodb.com/docs/v7.0/reference/operator/update/positional/)
+[$ (update)](https://www.mongodb.com/docs/v7.0/reference/operator/update/positional/)
 
  ```
  db.test.updateOne(
@@ -334,4 +334,31 @@ then use $ symbol for update the first element of this array of object
 
 )
  ```
+***5-11 delete documents, drop collection and how to explore by yourself***
+ ## [Delete Methods](https://www.mongodb.com/docs/manual/reference/delete-methods/)
 
+ Method for delete document
+
+ ```
+ db.test.deleteOne({_id:ObjectId("6406ad65fc13ae5a400000c6")})
+
+ 
+ ```
+
+ If i need delete multiple document the we use db.collection.deleteMany() 
+
+
+ ***If we want to create new database collection then ***
+ [db.createCollection](https://www.mongodb.com/docs/manual/reference/method/db.createCollection/)
+
+ ```
+ db.createCollection("posts")
+ ```
+
+ ***If we want to delete a collection then***
+
+ [db.collection.drop](https://www.mongodb.com/docs/manual/reference/method/db.collection.drop/)
+
+ ```
+ db.posts.drop( { writeConcern: { w: 1 } } )
+ ```
