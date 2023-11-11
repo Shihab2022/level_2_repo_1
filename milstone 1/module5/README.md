@@ -94,3 +94,29 @@ If the data is an array of object then ,
  ```
   db.test.find({'skills.name':{$in:['JAVASCRIPT','JAVA']}},{interests:1,skills:1}).sort({age:1})
  ```
+
+
+
+
+ **Module  5-6 $exists, $type,$size**
+## [Element Query Operators](https://www.mongodb.com/docs/manual/reference/operator/query-element/)
+
+**$exists use for check the field is present or not inside data**
+**It receive only boolean true or false**
+```
+
+db.test.find({favoutiteColor:{$exists:true}})
+db.test.find({favoutiteColor:{$exists:false}})
+
+```
+
+
+*** $type ***
+[(https://www.mongodb.com/docs/manual/reference/operator/query/type/#mongodb-query-op.-type)](https://www.mongodb.com/docs/manual/reference/operator/query/type/#mongodb-query-op.-type)
+
+**If some field data is different type as like age=10 or '10' . then if we need the which age is string type**
+**Or we can put any type and then get this specific type data**
+
+```
+db.test.find({friends:{$type: "array"}})
+```
