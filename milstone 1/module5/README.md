@@ -284,4 +284,54 @@ This is for array .
 
     )
  ```
+ **5-10 More about $set, how to explore documentation**
+
+ ## [Update Operators](https://www.mongodb.com/docs/manual/reference/operator/update/)
+
+**For one object element**
+
+ ```
+ // -----> If we update on object property then we can flow this way
+
+ db.test.updateOne(
+    {_id:ObjectId("6406ad65fc13ae5a400000c6")},
+        {$set: {'address.city':'Rajshahi'}}
+
+    )
+ ```
+**For multiple object element**
+
+ ```
+ //----------> If we update multiple object element . We can add as object element 
+
+ db.test.updateOne(
+    {_id:ObjectId("6406ad65fc13ae5a400000c6")},
+        {$set: {'address.city':'Rajshahi','address.country':'Bangladesh'},}
+
+    )
+ ```
+
+ **For  Array of object element**
+
+ First we have to search the array by id and array element
+ ```
+  { _id: ObjectId("6406ad65fc13ae5a400000c6"),
+    'education.major': 'Business' },
+ ```
+then use $ symbol for update the first element of this array of object 
+##[$ (update)](https://www.mongodb.com/docs/v7.0/reference/operator/update/positional/)
+
+ ```
+ db.test.updateOne(
+    { _id: ObjectId("6406ad65fc13ae5a400000c6"),
+    'education.major': 'Business' },
+    { $set:
+    
+    { 'education.$.degree': 'Honuse' },
+    
+        
+    }
+
+)
+ ```
 
