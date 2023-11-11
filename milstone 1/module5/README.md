@@ -112,7 +112,7 @@ db.test.find({favoutiteColor:{$exists:false}})
 
 
 *** $type ***
-[(https://www.mongodb.com/docs/manual/reference/operator/query/type/#mongodb-query-op.-type)](https://www.mongodb.com/docs/manual/reference/operator/query/type/#mongodb-query-op.-type)
+[$type](https://www.mongodb.com/docs/manual/reference/operator/query/type/#mongodb-query-op.-type)
 
 **If some field data is different type as like age=10 or '10' . then if we need the which age is string type**
 **Or we can put any type and then get this specific type data**
@@ -123,7 +123,7 @@ db.test.find({friends:{$type: "array"}})
 
 
 *** $Size ***
-[(https://www.mongodb.com/docs/manual/reference/operator/query/size/)](https://www.mongodb.com/docs/manual/reference/operator/query/size/)
+[$Size](https://www.mongodb.com/docs/manual/reference/operator/query/size/)
 
 **If i check array by length ways then we can use $size operator**
 **here if we put size 4 then it check that there have any friends array that length is 4**
