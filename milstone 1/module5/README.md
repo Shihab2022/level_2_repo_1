@@ -46,3 +46,45 @@ db.test.find({
      ]},{interests:1,gender:1}).sort({age:1})
 
 ```
+
+If the data is an array of object then ,
+```
+/// Demo data
+	"skills" : [
+		{
+			"name" : "JAVA",
+			"level" : "Intermidiate",
+			"isLearning" : true
+		},
+		{
+			"name" : "JAVA",
+			"level" : "Beginner",
+			"isLearning" : false
+		},
+		{
+			"name" : "GO",
+			"level" : "Beginner",
+			"isLearning" : false
+		},
+		{
+			"name" : "JAVA",
+			"level" : "Intermidiate",
+			"isLearning" : false
+		},
+		{
+			"name" : "GO",
+			"level" : "Beginner",
+			"isLearning" : false
+		}
+	],
+    
+ ```
+ then the code is ,
+ ```
+ // main change is --------> we declare the array element inside ' ' .then every thing is same 
+
+ db.test.find({$or:[
+{'skills.name':'JAVA'},
+{'skills.name':'JAVASCRIPT'},
+     ]},{interests:1,skills:1}).sort({age:1})
+ ```
