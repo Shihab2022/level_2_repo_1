@@ -120,3 +120,14 @@ db.test.find({favoutiteColor:{$exists:false}})
 ```
 db.test.find({friends:{$type: "array"}})
 ```
+
+
+*** $Size ***
+[(https://www.mongodb.com/docs/manual/reference/operator/query/size/)](https://www.mongodb.com/docs/manual/reference/operator/query/size/)
+
+**If i check array by length ways then we can use $size operator**
+**here if we put size 4 then it check that there have any friends array that length is 4**
+```
+db.test.find({friends:{$size:4}}).project({friends:1})
+
+```
