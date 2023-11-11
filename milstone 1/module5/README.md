@@ -234,3 +234,54 @@ db.test.updateOne(
     }
     )
 ```
+ **5-9 $unset, $pop, $pull, $pullAll**
+
+ ## [Update Operators](https://www.mongodb.com/docs/manual/reference/operator/update/)
+
+
+ **$unset**
+
+ ```
+ //If we remove a field 
+
+ db.test.updateOne(
+    {_id:ObjectId("6406ad65fc13ae5a400000c6")},
+        {$unset:{	"birthday":1}}
+
+    )
+ ```
+
+ **$pop**
+This is for array . 
+ ```
+ //if we put 1 it remove last element . If I put -1 then it remove first element
+ db.test.updateOne(
+    {_id:ObjectId("6406ad65fc13ae5a400000c6")},
+        {$pop:{	"languages":1}}
+
+    )
+ ```
+
+ **$pull**
+ If we remove an specific element then we use pull operator
+
+  ```
+ db.test.updateOne(
+    {_id:ObjectId("6406ad65fc13ae5a400000c6")},
+        {$pull:{"languages":"Tajik"}}
+
+    )
+ ```
+
+ **$pullAll**
+
+ Here we can provide more value inside an array then it remove all element
+
+ ```
+ db.test.updateOne(
+    {_id:ObjectId("6406ad65fc13ae5a400000c6")},
+        {$pullAll: {languages:[ "Macedonian", "Albanian", "bangla", "arabic" ]}}
+
+    )
+ ```
+
