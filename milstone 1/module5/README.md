@@ -88,3 +88,9 @@ If the data is an array of object then ,
 {'skills.name':'JAVASCRIPT'},
      ]},{interests:1,skills:1}).sort({age:1})
  ```
+
+
+ If field name is same then we use the $in 
+ ```
+  db.test.find({'skills.name':{$in:['JAVASCRIPT','JAVA']}},{interests:1,skills:1}).sort({age:1})
+ ```
