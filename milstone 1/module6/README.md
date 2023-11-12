@@ -88,3 +88,69 @@ db.test.aggregate([
 ```
 
 *Here we have to add the collection name where we want to marge*
+
+
+**6-3 $group , $sum , $push aggregation stage**
+
+[$group (aggregation)](https://www.mongodb.com/docs/manual/reference/operator/aggregation/group/#:~:text=Use%20the%20_id%20field%20in,are%20set%20using%20accumulator%20expressions.)
+
+Group is use for groping the data . 
+
+```
+db.test.aggregate([
+
+{$group: { _id: "$age"}},
+
+    ])
+```
+*Here we must put the _id and put the field name which field is requared for groping...*
+
+*We can put multiple operator inside group*
+
+
+## [$sum (aggregation)](https://www.mongodb.com/docs/manual/reference/operator/aggregation/sum/)
+
+it will count how many time are present in this value 
+```
+db.test.aggregate([
+
+{$group: { _id: "$age",count:{$sum:1}}},
+//-->  {$group: { _id: "$address.country",count:{$sum:1}}},
+    ])
+```
+
+
+## [$push (aggregation)](https://www.mongodb.com/docs/v3.0/reference/operator/aggregation/push/)
+
+
+```
+db.test.aggregate([
+//stage1
+{$group: {
+    _id: "$address.country",
+    count:{$sum:1},
+    fullDoc:{$push:'$phone'},
+
+    // here fullDoc is an array where there have all the phone number base on country and its an array
+}},
+
+    ])
+```
+
+*If we get all the element base on country then we use -----------> $$ROOT
+
+```
+db.test.aggregate([
+//stage1
+{
+    $group: { _id: "$address.country"  ,  count:{$sum:1},
+    fullDoc:{$push:'$$ROOT'}},
+
+}
+//-------> if we get some specific field then add this
+//stage2
+{
+    $project: {'fullDoc.name':1,'fullDoc.email':1,'fullDoc.phone':1}
+}
+    ])
+```
