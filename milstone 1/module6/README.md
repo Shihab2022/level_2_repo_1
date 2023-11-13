@@ -1,9 +1,11 @@
 ## For multiple query Aggregation
 
-
 [mongodb](https://www.mongodb.com/basics/aggregation)
 [w3schools](https://www.w3schools.com/mongodb/mongodb_aggregations_intro.php)
+
 ## Good ---> [studio3t](https://studio3t.com/knowledge-base/articles/mongodb-aggregation-framework/)
+
+[Aggregation Pipeline Operators](https://www.mongodb.com/docs/manual/reference/operator/aggregation/)
 
 Aggregate will work as like find .
 
@@ -14,10 +16,12 @@ db.test.aggregate([]) // for get all the value
 ```
 
 Main difference is aggregate will check stage by stage, modify , sort etc
+
 ## [$match](https://www.mongodb.com/docs/manual/reference/operator/aggregation/match/#:~:text=Syntax&text=%24match%20takes%20a%20document%20that,include%20aggregation%20expression%20in%20%24match%20.)
+
 ```
 db.test.aggregate([
-    ///---->Stage-2-->here check if age is less than 30 
+    ///---->Stage-2-->here check if age is less than 30
 {$match:{age:{$lt:30}}},
 ///----> if age less than 30 then sort by age descending order
 {$sort:{age:-1}},
@@ -27,15 +31,15 @@ db.test.aggregate([
     ])
 ```
 
-*Here one thing that $project we use last .If we use top it wil create issue*
+_Here one thing that $project we use last .If we use top it wil create issue_
 
 **6-2 $addFields , $out , $merge aggregation stage**
 
 [$addFields](https://www.mongodb.com/docs/manual/reference/operator/aggregation/addFields/#:~:text=The%20stage%20has%20the%20following,information%20on%20expressions%2C%20see%20Expressions.)
 
-addFields mainly use for add new field in our pipline . 
+addFields mainly use for add new field in our pipline .
 
-*It not change our main document . It only add new filed and marge the data*
+_It not change our main document . It only add new filed and marge the data_
 
 ```
 db.test.aggregate([
@@ -49,11 +53,13 @@ db.test.aggregate([
 
     ])
 ```
-*We can add multiple field*
+
+_We can add multiple field_
 
 ## [$out (aggregation)](https://www.mongodb.com/docs/v4.2/reference/operator/aggregation/out/)
 
 **It not change the collection .It create new collection our data base from our main data base**
+
 ```
 db.test.aggregate([
     //stage 1
@@ -67,7 +73,8 @@ db.test.aggregate([
 
     ])
 ```
-*Here , If we use $project then it will add only which field that we add inside project*
+
+_Here , If we use $project then it will add only which field that we add inside project_
 
 ## [$merge (aggregation)](https://www.mongodb.com/docs/manual/reference/operator/aggregation/merge/)
 
@@ -87,14 +94,13 @@ db.test.aggregate([
     ])
 ```
 
-*Here we have to add the collection name where we want to marge*
-
+_Here we have to add the collection name where we want to marge_
 
 **6-3 $group , $sum , $push aggregation stage**
 
 [$group (aggregation)](https://www.mongodb.com/docs/manual/reference/operator/aggregation/group/#:~:text=Use%20the%20_id%20field%20in,are%20set%20using%20accumulator%20expressions.)
 
-Group is use for groping the data . 
+Group is use for groping the data .
 
 ```
 db.test.aggregate([
@@ -103,14 +109,15 @@ db.test.aggregate([
 
     ])
 ```
-*Here we must put the _id and put the field name which field is requared for groping...*
 
-*We can put multiple operator inside group*
+_Here we must put the \_id and put the field name which field is requared for groping..._
 
+_We can put multiple operator inside group_
 
 ## [$sum (aggregation)](https://www.mongodb.com/docs/manual/reference/operator/aggregation/sum/)
 
-it will count how many time are present in this value 
+it will count how many time are present in this value
+
 ```
 db.test.aggregate([
 
@@ -119,9 +126,7 @@ db.test.aggregate([
     ])
 ```
 
-
 ## [$push (aggregation)](https://www.mongodb.com/docs/v3.0/reference/operator/aggregation/push/)
-
 
 ```
 db.test.aggregate([
@@ -137,7 +142,7 @@ db.test.aggregate([
     ])
 ```
 
-*If we get all the element base on country then we use -----------> $$ROOT
+\*If we get all the element base on country then we use -----------> $$ROOT
 
 ```
 db.test.aggregate([
@@ -155,25 +160,24 @@ db.test.aggregate([
     ])
 ```
 
-
 **6-4 explore more about $group & $project**
-## [Max ,min ,avg.....](https://studio3t.com/knowledge-base/articles/mongodb-aggregation-framework/)
 
+## [Max ,min ,avg.....](https://studio3t.com/knowledge-base/articles/mongodb-aggregation-framework/)
 
 ```
 db.test.aggregate([
 //stage1
 {
-    $group: { 
-        // here weh use null as a id it will give use all the document . 
+    $group: {
+        // here weh use null as a id it will give use all the document .
         _id: null,
         totalSalary:{$sum:'$salary'},
         maxValue:{$max: "$salary"},
         minValue:{$min:"$salary"},
         avaValue:{$avg:'$salary'},
-        
-        
-        
+
+
+
     },
 
 },
@@ -181,23 +185,22 @@ db.test.aggregate([
     ])
 ```
 
-
-If we need to change the field name as like avaValue to averageSalary then we can do inside the project 
+If we need to change the field name as like avaValue to averageSalary then we can do inside the project
 
 ```
 db.test.aggregate([
 //stage1
 {
-    $group: { 
-        // here weh use null as a id it will give use all the document . 
+    $group: {
+        // here weh use null as a id it will give use all the document .
         _id: null,
         totalSalary:{$sum:'$salary'},
         maxValue:{$max: "$salary"},
         minValue:{$min:"$salary"},
         avaValue:{$avg:'$salary'},
-        
-        
-        
+
+
+
     },
 
 },
@@ -209,14 +212,44 @@ db.test.aggregate([
     maxValue:1,
     MinimumSalary:'$minValue',
     averageSalary:'$avaValue',
-    //--- if we need some calculate value . We can calculate thos 
+    //--- if we need some calculate value . We can calculate thos
     rangeBtMinToMax:{$subtract: [ "$maxValue", '$minValue' ]}
-    
-    
-        
+
+
+
     }
 }
 
     ])
 
+```
+
+**6-5 Explore $group with $unwind aggregation stage**
+
+[$unwind (aggregation)](https://www.mongodb.com/docs/manual/reference/operator/aggregation/unwind/)
+
+_If we need to group an array and use $group . It doblicate the value .To solve this error we use $unwind first then use group_
+
+```
+///---> here check how many time are used 
+db.test.aggregate([
+    // stage1
+{$unwind: "$friends"} ,
+//stage2
+{
+    $group: { _id: "$friends",count:{$sum:1}}
+}
+])
+```
+
+*If we comment unwind then we see the different .*
+```
+db.test.aggregate([
+    // stage1
+{$unwind: "$interests"} , 
+//stage2
+{
+    $group: { _id: "$age",intersetPerAge:{$push:'$interests'}}
+}
+    ])
 ```
