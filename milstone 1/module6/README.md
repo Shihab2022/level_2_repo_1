@@ -253,3 +253,65 @@ db.test.aggregate([
 }
     ])
 ```
+
+
+**6-6 $bucket, $sort, and $limit aggregation stage**
+
+[$bucket (aggregation)](https://www.mongodb.com/docs/manual/reference/operator/aggregation/bucket/)
+
+```
+db.test.aggregate([
+    {
+        $bucket: {
+              groupBy: "$age",
+              boundaries: [ 20, 40, 60,80 ],
+              default: "This is those person that age is getter then 80",
+              output: {
+                "count": { $sum: 1 },
+                "personsName" : { $push: "$name" }
+              }
+            }    
+    },
+     
+    ])
+```
+
+*We can use sort limit project other projection pipline*
+
+```
+db.test.aggregate([
+    //Stage 1 
+    {
+        $bucket: {
+              groupBy: "$age",
+              boundaries: [ 20, 40, 60,80 ],
+              default: "This is those person that age is upto 80",
+              output: {
+                "count": { $sum: 1 },
+                "personsName" : { $push: "$name" }
+              }
+            }
+        
+    },
+    
+   /// stage 2
+   {
+       $sort:{count:-1}
+   },
+   ///stage 3
+   
+   //----> limit use after the sort 
+   {
+       $limit:1
+   },
+   
+   //stage 4
+   {
+       $project: {count:1}
+   }
+    
+    ])
+
+
+
+```
