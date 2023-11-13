@@ -154,3 +154,69 @@ db.test.aggregate([
 }
     ])
 ```
+
+
+**6-4 explore more about $group & $project**
+## [Max ,min ,avg.....](https://studio3t.com/knowledge-base/articles/mongodb-aggregation-framework/)
+
+
+```
+db.test.aggregate([
+//stage1
+{
+    $group: { 
+        // here weh use null as a id it will give use all the document . 
+        _id: null,
+        totalSalary:{$sum:'$salary'},
+        maxValue:{$max: "$salary"},
+        minValue:{$min:"$salary"},
+        avaValue:{$avg:'$salary'},
+        
+        
+        
+    },
+
+},
+
+    ])
+```
+
+
+If we need to change the field name as like avaValue to averageSalary then we can do inside the project 
+
+```
+db.test.aggregate([
+//stage1
+{
+    $group: { 
+        // here weh use null as a id it will give use all the document . 
+        _id: null,
+        totalSalary:{$sum:'$salary'},
+        maxValue:{$max: "$salary"},
+        minValue:{$min:"$salary"},
+        avaValue:{$avg:'$salary'},
+        
+        
+        
+    },
+
+},
+// stage2
+
+{
+    $project: {
+    totalSalary:1,
+    maxValue:1,
+    MinimumSalary:'$minValue',
+    averageSalary:'$avaValue',
+    //--- if we need some calculate value . We can calculate thos 
+    rangeBtMinToMax:{$subtract: [ "$maxValue", '$minValue' ]}
+    
+    
+        
+    }
+}
+
+    ])
+
+```
