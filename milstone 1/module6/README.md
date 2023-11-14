@@ -315,3 +315,42 @@ db.test.aggregate([
 
 
 ```
+
+**6-7 $facet, multiple pipeline aggregation stage**
+
+
+*If we generate multiple pipeline in one aggregation we use $facet*
+
+```
+db.test.aggregate([
+    {
+        $facet: {
+            //--->pipeline --1
+            'friendsCount':[
+    //stage---1
+    {$unwind: "$friends"},
+    ///---stage--2
+{$group: { _id: "$friends",count:{$sum:1}}}    
+    ],
+   
+            //---->pipeline --2
+            'educationCount':[
+                //stage1
+                {$unwind: "$education"},
+                {$group: { _id: "$education",count:{$sum:1}}}
+                
+                ],
+            
+            ///--->pipeline --3
+            'skillsCount':[
+                //stage--1
+                {$unwind: "$skills"},
+                //stage--2
+                {$group: { _id: "$skills",count:{$sum:1}}}
+                
+                ]
+        }
+        }])
+```
+
+*It is use , When i create any report in same data then we use $facet*
