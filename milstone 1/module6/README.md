@@ -382,3 +382,17 @@ db.orders.aggregate([
  - LocalField means which key is need for connect .
  - ForeignField means what is the name of this key in other collection
  - As means , what is the name of the data that will add .
+
+
+**6-9 What is indexing, COLLSCAN vs IXSCAN**
+
+[db.collection.createIndex()](https://www.mongodb.com/docs/manual/reference/method/db.collection.createIndex/)
+
+- *If we find a data inside large amount of data then if we search menually it takes lot of time .*
+- *To solve this problem we can create an index than search data*
+
+```
+db.getCollection("massive-data").createIndex({email:1})
+```
+
+- here search data base on email and here use index for search 
