@@ -354,3 +354,31 @@ db.test.aggregate([
 ```
 
 *It is use , When i create any report in same data then we use $facet*
+
+
+**6-8 $lookup stage, embedding vs referencing.mp4**
+
+[$lookup (aggregation)](https://www.mongodb.com/docs/v3.4/reference/operator/aggregation/lookup/)
+
+*when we get data from one collection to another collection then we use $lookup*
+
+```
+db.orders.aggregate([
+    {
+        
+        $lookup: {
+               from: "test",
+               localField: "userId",
+               foreignField: "_id",
+               as: "user"
+             }
+        
+    }
+    
+    
+    ])
+```
+ - From means which collection we want to connect . 
+ - LocalField means which key is need for connect .
+ - ForeignField means what is the name of this key in other collection
+ - As means , what is the name of the data that will add .
