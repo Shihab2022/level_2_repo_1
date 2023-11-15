@@ -5,3 +5,6 @@
 
 **7-4 Event driven architecture, create your own events**
 [events](https://nodejs.org/dist/latest-v20.x/docs/api/events.html)
+
+**7-5 Stream and buffer, create your own server**
+[Stream and buffer](https://www.freecodecamp.org/news/do-you-want-a-better-understanding-of-buffer-in-node-js-check-this-out-2e29de2968e8/)
