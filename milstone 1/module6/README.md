@@ -393,6 +393,18 @@ db.orders.aggregate([
 
 ```
 db.getCollection("massive-data").createIndex({email:1})
+// ---- if we need to delete the index then we can use  this command
+//db.getCollection("massive-data").dropIndex({email:1})
 ```
 
 - here search data base on email and here use index for search 
+
+
+**6-10 Explore compound index and text index**
+
+- If we add multiple index then it called compound index .
+- If we search a text which include dolor then we use text index
+
+```
+db.getCollection("massive-data").find({$text:{$search:'dolor'}}).project({about:1})
+```
