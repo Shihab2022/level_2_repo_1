@@ -11,4 +11,19 @@
 
 **7-6 Installing express, typescript**
 
+**For create inti file we put**
+```
+npm init
+```
+then press enter many time .
+
+
 [expressjs](https://expressjs.com/en/starter/installing.html)
+
+
+**7-7 What is parsers, request and response object**
+
+*It use for convert tsc file to js . If we made any change it will auto convert to js file*
+```
+tsc -w
+```
