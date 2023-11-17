@@ -27,3 +27,53 @@ then press enter many time .
 ```
 tsc -w
 ```
+
+**7-8 middleware in express.js**
+
+*if we send data by params*
+```
+http://localhost:5000/152/25366666666666666666666
+```
+
+```
+app.get('/:id/:userId', (req:Request, res:Response) => {
+console.log(  req.params)
+  res.send('Hello world')
+})
+```
+*if we send data by query*
+
+```
+http://localhost:5000?name=shihab
+```
+*If we send multiple query*
+```
+http://localhost:5000?name=shihab&emial=shiab@gmail.com&education=3rt year
+```
+```
+app.get('/', (req:Request, res:Response) => {
+console.log(  req.query)
+  res.send('Hello world')
+})
+```
+
+
+## For middleware function 
+
+```
+const logger=(req:Request,res:Response,next:NextFunction)=>{
+console.log(req.url)
+console.log(req.method)
+console.log(req.hostname)
+next()
+}
+```
+*When we use middleware we must call next function . If we are not call and use this it will give us loading*
+
+```
+// here we can use multiple middleware separated by comma
+app.get('/',logger, (req:Request, res:Response) => {
+// console.log(  req.query)
+  res.send('Hello world')
+})
+```
