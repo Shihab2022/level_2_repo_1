@@ -77,3 +77,98 @@ app.get('/',logger, (req:Request, res:Response) => {
   res.send('Hello world')
 })
 ```
+
+
+**7-9 Routing in express.js**
+
+
+```
+const userRouter=express.Router()
+const courseRouter=express.Router()
+// For use router in our app
+app.use("/api/v1/users",userRouter)
+app.use("/api/v1/course",courseRouter)
+
+userRouter.get("/create-user",(req:Request,res:Response)=>{
+  const user=req.body
+  console.log(user)
+  res.json({
+    success:true,
+    message:'User create successfully',
+    user:user
+  })
+})
+
+courseRouter.post("/create-course",(req:Request,res:Response)=>{
+  const course=req.body
+  console.log(course)
+  res.json({
+    success:true,
+    message:'Course create successfully',
+    user:course
+  })
+
+})
+```
+
+
+**7-10 express Error Handler part 1**
+
+*handle error inside block*
+```
+app.get('/error-handler',logger,async(req:Request,res:Response,next:NextFunction)=>{
+/// we use async await 
+//and try catch for error handle
+try{
+  res.send(some thing wrong )  
+}
+catch(error){
+res.status(400).json({
+  success:false,
+  message:'Your request is field .'
+})
+}
+})
+```
+
+
+*If we handle all the error (without route error) global way then we use this code*
+
+```
+app.get('/error-handler',logger,async(req:Request,res:Response,next:NextFunction)=>{
+/// we use async await 
+//and try catch for error handle
+try{
+  res.send(some thing wrong )  
+}
+catch(error){
+ next(error)
+}
+})
+```
+
+## This is use last of the app 
+```
+app.use((error:any,req:Request,res:Response,next:NextFunction)=>{
+  if(error){
+    res.status(400).json({
+  success:false,
+  message:'Your request is field form global.'
+})
+  }
+})
+```
+
+
+**Route error handle**
+*This is use last all the route*
+*this is use first then use global error*
+```
+ // route error
+app.all('*',(req:Request,res:Response)=>{
+  res.status(400).json({
+    success:false,
+    message:'You put wrong route !!!'
+  })
+})
+```
